@@ -1,5 +1,6 @@
 package bookstore.shop.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Book extends BaseEntity {
     @OneToMany
     private Set<Author> author;
@@ -28,7 +30,7 @@ public class Book extends BaseEntity {
     @Column
     private BigDecimal price;
     @Column
-    private ImageIcon image;
+    private String image;
     @Column
     private int year;
     @ManyToOne

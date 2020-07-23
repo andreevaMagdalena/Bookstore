@@ -31,7 +31,7 @@ public class UserController {
         this.modelMapper = modelMapper;
     }
 
-    @GetMapping("/login")
+   @GetMapping("/login")
     public String login(Model model){
         if (!model.containsAttribute("userLoginBindingModel")){
             model.addAttribute("userLoginBindingModel",new UserLoginBindingModel());
@@ -55,10 +55,10 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel");
 
-            return "redirect:register";
+            return "register";
         }
         this.userService.register(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
-        return "redirect:login";
+        return "login";
     }
     @PostMapping("/login")
     public String loginConfirm(@Valid @ModelAttribute() UserLoginBindingModel userLoginBindingModel,
@@ -67,21 +67,21 @@ public class UserController {
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel");
-            return "redirect:login";
+            return "login";
         }
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
         if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())){
             redirectAttributes.addFlashAttribute("norFound", true);
-            return "redirect:login";
+            return "login";
         }
         httpSession.setAttribute("user", user);
 
-        return "redirect:/";
+        return "redirect:/index";
     }
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.invalidate();
-        return "redirect:/";
+        return "redirect:/index";
     }
 
 

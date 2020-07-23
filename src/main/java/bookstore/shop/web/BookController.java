@@ -33,7 +33,7 @@ public class BookController {
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
 
         if (bindingResult.hasErrors()){
-            return "redirect:add";
+            return "add-item";
         }
         this.bookService.addBook(this.modelMapper.map(bookAddBindingModel, BookServiceModel.class));
         return "redirect:/";
