@@ -39,9 +39,6 @@ public class Book extends BaseEntity {
     private Set<Category> category;
     @Column
     private String languages;
-    @ManyToOne
-    private Order order;
-
 
 
 }

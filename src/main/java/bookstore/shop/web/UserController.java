@@ -58,7 +58,7 @@ public class UserController {
             return "register";
         }
         this.userService.register(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
-        return "login";
+        return "redirect:/users/login";
     }
     @PostMapping("/login")
     public String loginConfirm(@Valid @ModelAttribute() UserLoginBindingModel userLoginBindingModel,
@@ -76,12 +76,12 @@ public class UserController {
         }
         httpSession.setAttribute("user", user);
 
-        return "redirect:/index";
+        return "redirect:/";
     }
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
         httpSession.invalidate();
-        return "redirect:/index";
+        return "redirect:/";
     }
 
 

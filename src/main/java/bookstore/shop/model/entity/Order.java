@@ -4,11 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -16,6 +15,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class Order extends BaseEntity {
+    @OneToMany
+    private Set<Book> book;
     @Column(name = "order_date")
     private LocalDateTime orderDate;
     @Column

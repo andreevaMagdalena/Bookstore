@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <th:block th:include="~{/fragments/nav}"></th:block>
+    </nav>
+</header>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Author</span></h1>
+    <hr class="hr-3"/>
+    <form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:action="@{/authors/add}" method="POST">
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="firstName" class="h4 mb-2">First name</label>
+            </div>
+            <input type="text" class="form-control" id="firstName" name="firstName" />
+            <small class="text-danger">Incorrect name!</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="lastName" class="h4 mb-2">Last name</label>
+            </div>
+            <input type="text" class="form-control" id="lastName" name="lastName" />
+            <small class="text-danger">Incorrect name!</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="about" class="h4 mb-2">About</label>
+            </div>
+            <input type="text" class="form-control" id="about" name="about" />
+            <small class="text-danger">Incorrect title!</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="birthYear" class="h4 mb-2">Year</label>
+            </div>
+            <input type="text" class="form-control" id="birthYear" name="birthYear"/>
+            <small class="text-danger">Incorrect year</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="nationality" class="h4 mb-2">Nationality</label>
+            </div>
+            <input type="text" class="form-control" id="nationality" name="nationality"/>
+            <small class="text-danger">Incorrect nationality!</small>
+        </div>
+
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary text-white mb-3">Add Author</button>
+        </div>
+    </form>
+</main>
+<footer class="footer bg-dark  py-2">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

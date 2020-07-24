@@ -20,7 +20,6 @@ public class UserRegisterBindingModel {
     private String email;
     @Length(min = 2, message = "Username length must be more than two characters")
     private String password;
-    @Length(min = 2, message = "Username length must be more than two characters")
     private String confirmPassword;
     @NotNull(message = "Address is required")
     private String address;
