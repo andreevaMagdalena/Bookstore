@@ -11,5 +11,5 @@ public interface PublisherRepository extends JpaRepository<Publisher, String> {
     @Override
     Optional<Publisher> findById(String s);
 
-    Publisher findByCompanyName(String name);
+    Optional<Publisher> findByCompanyName(String name);
 }

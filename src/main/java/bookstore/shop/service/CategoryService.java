@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface CategoryService {
    Category findById(String id);
-   List<Category> findAll();
+   List<String> findAll();
    void addCategory(CategoryServiceModel categoryServiceModel);
+   CategoryServiceModel findByName(String name);
 }

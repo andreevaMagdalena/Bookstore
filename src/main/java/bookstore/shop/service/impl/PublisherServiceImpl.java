@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PublisherServiceImpl implements PublisherService {
     private final PublisherRepository publisherRepository;
@@ -24,13 +26,14 @@ public class PublisherServiceImpl implements PublisherService {
     }
 
     @Override
-    public Publisher findByName(String name) {
-        return this.publisherRepository.findByCompanyName(name);
+    public PublisherServiceModel findByName(String name) {
+        return this.publisherRepository.findByCompanyName(name).map(p -> this.modelMapper.map(p, PublisherServiceModel.class)).orElse(null);
     }
 
     @Override
-    public List<Publisher> findAll() {
-        return this.publisherRepository.findAll();
+    public List<String> findAll() {
+        return this.publisherRepository.findAll().stream()
+                .map(Publisher::getCompanyName).collect(Collectors.toList());
     }
 
     @Override

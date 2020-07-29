@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PublisherService {
     Publisher findById(String id);
-    Publisher findByName(String name);
-    List<Publisher> findAll();
+    PublisherServiceModel findByName(String name);
+    List<String> findAll();
     void addPublisher(PublisherServiceModel publisherServiceModel);
 }

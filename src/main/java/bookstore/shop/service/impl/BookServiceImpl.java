@@ -1,5 +1,6 @@
 package bookstore.shop.service.impl;
 
+import bookstore.shop.model.entity.Author;
 import bookstore.shop.model.entity.Book;
 import bookstore.shop.model.entity.Category;
 import bookstore.shop.model.entity.Publisher;
@@ -10,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -33,8 +35,10 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(BookServiceModel bookServiceModel) {
-        Book book = this.modelMapper.map(bookServiceModel, Book.class);
-        this.bookRepository.saveAndFlush(book);
+
+       this.bookRepository.save(this.modelMapper
+               .map(bookServiceModel, Book.class));
+
     }
 
     @Override

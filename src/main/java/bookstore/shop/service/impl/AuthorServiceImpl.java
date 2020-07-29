@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -28,12 +29,19 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public List<Author> getAuthors() {
-        return this.repository.findAll();
+    public List<String> getAuthors() {
+        return
+                this.repository.findAll().stream().map(Author::getFirstName).collect(Collectors.toList());
     }
 
     @Override
     public AuthorServiceModel getById(String id) {
         return this.modelMapper.map(this.repository.findById(id), AuthorServiceModel.class);
+    }
+
+    @Override
+    public AuthorServiceModel getByName(String name) {
+        return this.repository.findByFirstName(name).map(n ->
+               this.modelMapper.map(n, AuthorServiceModel.class)).orElse(null);
     }
 }

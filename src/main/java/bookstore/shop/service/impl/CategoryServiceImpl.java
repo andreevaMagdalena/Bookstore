@@ -8,6 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
@@ -25,8 +27,8 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     @Override
-    public List<Category> findAll() {
-        return this.repository.findAll();
+    public List<String> findAll() {
+        return this.repository.findAll().stream().map(Category::getCategoryName).collect(Collectors.toList());
     }
 
     @Override
@@ -34,5 +36,11 @@ public class CategoryServiceImpl implements CategoryService {
         Category category = this.modelMapper.map(categoryServiceModel, Category.class);
         this.repository.saveAndFlush(category);
 
+    }
+
+    @Override
+    public CategoryServiceModel findByName(String name) {
+        return this.repository.findByCategoryName(name)
+                .map(c -> this.modelMapper.map(c, CategoryServiceModel.class)).orElse(null);
     }
 }

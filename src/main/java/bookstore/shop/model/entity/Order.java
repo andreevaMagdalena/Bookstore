@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Order extends BaseEntity {
     @OneToMany
-    private Set<Book> book;
+    private List<Book> book;
     @Column(name = "order_date")
     private LocalDateTime orderDate;
     @Column

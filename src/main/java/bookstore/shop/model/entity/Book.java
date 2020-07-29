@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.swing.*;
+import javax.validation.constraints.Null;
 import java.math.BigDecimal;
-import java.util.Set;
+
 
 
 
@@ -19,8 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Book extends BaseEntity {
-    @OneToMany
-    private Set<Author> author;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Author author;
     @Column
     private String ISBN;
     @Column
@@ -30,13 +30,11 @@ public class Book extends BaseEntity {
     @Column
     private BigDecimal price;
     @Column
-    private String image;
-    @Column
     private int year;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Publisher publisher;
-    @OneToMany
-    private Set<Category> category;
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Category category;
     @Column
     private String languages;
 

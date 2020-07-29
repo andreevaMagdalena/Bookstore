@@ -1,16 +1,15 @@
 package bookstore.shop.model.binding;
 
-import bookstore.shop.model.entity.Author;
-import bookstore.shop.model.entity.Category;
-import bookstore.shop.model.entity.Order;
-import bookstore.shop.model.entity.Publisher;
+import bookstore.shop.model.service.AuthorServiceModel;
+import bookstore.shop.model.service.CategoryServiceModel;
+import bookstore.shop.model.service.PublisherServiceModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.swing.*;
 import java.math.BigDecimal;
+
 
 
 @Getter
@@ -18,15 +17,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookAddBindingModel {
-    private Author author;
+    private String author;
     private String ISBN;
     private String title;
     private String description;
     private BigDecimal price;
-    private ImageIcon image;
     private int year;
-    private Publisher publisher;
-    private Category category;
+    private String publisher;
+    private String category;
     private String languages;
 
 }

@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface AuthorService {
     void addAuthor(AuthorServiceModel author);
-    List<Author> getAuthors();
+    List<String> getAuthors();
     AuthorServiceModel getById(String id);
+    AuthorServiceModel getByName(String name);
 
 }
