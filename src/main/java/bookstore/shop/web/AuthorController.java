@@ -38,7 +38,7 @@ public class AuthorController {
             return "add-author";
         }
         this.authorService.addAuthor(this.modelMapper.map(authorAddBindingModel, AuthorServiceModel.class));
-        return "redirect:/index";
+        return "redirect:/";
     }
 
 

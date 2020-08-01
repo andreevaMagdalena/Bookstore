@@ -68,16 +68,20 @@ public class BookController {
 
         return "redirect:/";
     }
+    //todo
     @GetMapping("/details")
     public ModelAndView details(@RequestParam("id") String id, ModelAndView modelAndView){
         modelAndView.addObject("item", this.bookService.findById(id));
         modelAndView.setViewName("details-item");
         return modelAndView;
     }
+    //todo
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") String id){
         this.bookService.delete(id);
         return "redirect:/";
     }
+
+
 
 }

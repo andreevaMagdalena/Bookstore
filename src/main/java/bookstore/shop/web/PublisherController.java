@@ -38,6 +38,6 @@ private final ModelMapper modelMapper;
             return "add-category";
         }
         this.publisherService.addPublisher(this.modelMapper.map(publisherAddBindingModel, PublisherServiceModel.class));
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

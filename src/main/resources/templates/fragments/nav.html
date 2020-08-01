@@ -1,7 +1,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <th:block>
-    <a class="nav-link text-white active h5" href="/">Magi's</a>
+    <a class="nav-link text-white active h3" href="/">Magi's</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -11,30 +11,30 @@
 
            <th:block th:if="${session.isEmpty()}">
                <li class="nav-item col-md-4">
-                   <a class="nav-link text-white active h6" href="/users/login">Login</a>
+                   <a class="nav-link text-white active h5" href="/users/login">Login</a>
                </li>
                <li class="nav-item col-md-4">
-                   <a class="nav-link text-white active h6" href="/users/register">Register</a>
+                   <a class="nav-link text-white active h5" href="/users/register">Register</a>
                </li>
            </th:block>
             <th:block th:unless="${session.isEmpty()}">
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/authors/add">Add Author</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/authors/add">Add Author</a>
                 </li>
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/publishers/add">Add Publisher</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/publishers/add">Add Publisher</a>
                 </li>
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/categories/add">Add Category</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/categories/add">Add Category</a>
                 </li>
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/books/add">Add Book</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/books/add">Add Book</a>
                 </li>
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/orders/list">Orders</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/orders/list">Orders</a>
                 </li>
-                <li class="col-md-4">
-                    <a class="nav-link text-white active h6" href="/users/logout">Logout</a>
+                <li class="col-md-2">
+                    <a class="nav-link text-white active h5" href="/users/logout">Logout</a>
                 </li>
             </th:block>
         </ul>

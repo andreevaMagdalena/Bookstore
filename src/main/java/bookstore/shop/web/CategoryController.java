@@ -38,6 +38,6 @@ public class CategoryController {
             return "add-category";
         }
         this.categoryService.addCategory(this.modelMapper.map(categoryAddBindingModel, CategoryServiceModel.class));
-        return "redirect:/index";
+        return "redirect:/";
     }
 }

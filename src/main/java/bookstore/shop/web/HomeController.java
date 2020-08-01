@@ -5,24 +5,32 @@ import bookstore.shop.service.AuthorService;
 import bookstore.shop.service.BookService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class HomeController {
    private final BookService bookService;
-   private final AuthorService authorService;
 
 
-    public HomeController(BookService bookService, AuthorService authorService) {
+    public HomeController(BookService bookService) {
         this.bookService = bookService;
-        this.authorService = authorService;
+
     }
 
 
-    @GetMapping("/index")
-    public String index(){
-        return "index";
-    }
+    @GetMapping("/")
+    public ModelAndView index(HttpSession httpSession, ModelAndView modelAndView){
+        if (httpSession.getAttribute("user") == null){
+            modelAndView.setViewName("index");
+        }else {
+            modelAndView.addObject("books", this.bookService.allBooks());
+            modelAndView.setViewName("home");
+        }
 
+        return modelAndView;
+    }
 
 }
