@@ -4,6 +4,7 @@ package bookstore.shop.web;
 import bookstore.shop.model.binding.UserLoginBindingModel;
 import bookstore.shop.model.binding.UserRegisterBindingModel;
 import bookstore.shop.model.service.UserServiceModel;
+import bookstore.shop.model.view.UserProfileView;
 import bookstore.shop.service.UserService;
 
 
@@ -11,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -30,7 +28,11 @@ public class UserController {
         this.userService = userService;
         this.modelMapper = modelMapper;
     }
-
+    @GetMapping("/profile")
+    public String profile(@RequestParam("id") String id, Model model){
+        model.addAttribute("user", this.modelMapper.map(this.userService.findById(id), UserProfileView.class));
+        return "profile";
+    }
    @GetMapping("/login")
     public String login(Model model){
         if (!model.containsAttribute("userLoginBindingModel")){

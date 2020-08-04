@@ -1,12 +1,12 @@
 package bookstore.shop.model.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 public class OrderServiceModel {
     @NotNull(message = "Must choose a book")
     private BookServiceModel book;
-    @NotNull(message = "Date is required")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @FutureOrPresent(message = "The order can not be in the past")
     private LocalDateTime orderDate;
     @DecimalMin(value = "0", message = "Price can not be negative value")
     private BigDecimal price;

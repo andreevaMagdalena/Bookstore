@@ -39,6 +39,7 @@ public class OrderController {
     @PostMapping("/list")
     public String addConfirm(@Valid @ModelAttribute("orderAddBindingModel")OrderAddBindingModel orderAddBindingModel,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
+        System.out.println();
         BookServiceModel book = this.bookService.findByName(orderAddBindingModel.getBook().getTitle());
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("orderAddBindingModel" ,orderAddBindingModel);
