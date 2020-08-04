@@ -1,11 +1,13 @@
 package bookstore.shop.web;
 
 import bookstore.shop.model.binding.AuthorAddBindingModel;
+import bookstore.shop.model.binding.UserRegisterBindingModel;
 import bookstore.shop.model.service.AuthorServiceModel;
 import bookstore.shop.model.service.BookServiceModel;
 import bookstore.shop.service.AuthorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +30,10 @@ public class AuthorController {
 
 
     @GetMapping("/add")
-    public String addAuthor(){
+    public String addAuthor(Model model){
+        if (!model.containsAttribute("authorAddBindingModel")){
+            model.addAttribute("authorAddBindingModel", new AuthorAddBindingModel());
+        }
         return "add-author";
     }
     @PostMapping("/add")

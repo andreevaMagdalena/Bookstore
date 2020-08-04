@@ -9,23 +9,59 @@
         <th:block th:include="~{/fragments/nav}"></th:block>
     </nav>
 </header>
-<table>
-    <thead>
-    <tr>
-        <th> Title </th>
-        <th> Author </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${orders.isEmpty()}">
-        <td colspan="2"> No Books Available </td>
-    </tr>
-    <tr th:each="o : ${orders}">
-        <td><span th:text="${book.title}"> Title </span></td>
-        <td><span th:text="${book.author}"> Author </span></td>
-    </tr>
-    </tbody>
-</table>
+<h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Order</span></h1>
+<hr class="hr-3"/>
+<form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:action="@{/orders/list}" method="POST">
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="book" class="h4 mb-2">Book</label>
+        </div>
+        <select class="browser-default custom-select" id="book" name="book">
+            <option value="">Select book</option>
+            <option th:each="p : ${books}" th:text="${p.title}"  th:value="${p.title}"></option>
+        </select>
+
+    </div>
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="orderDate" class="h4 mb-2">Date</label>
+        </div>
+        <input type="text" class="form-control" id="orderDate" name="orderDate" />
+        <small class="text-danger">Incorrect Date!</small>
+    </div>
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="price" class="h4 mb-2">Price</label>
+        </div>
+        <input type="number" class="form-control" id="price" name="price" />
+        <small class="text-danger">Incorrect Price!</small>
+    </div>
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="shoppingInfo" class="h4 mb-2">Shopping details</label>
+        </div>
+        <input type="text" class="form-control" id="shoppingInfo" name="shoppingInfo"/>
+    </div>
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="paymentMethod" class="h4 mb-2">Payment method</label>
+        </div>
+        <select class="browser-default custom-select" id="paymentMethod" name="paymentMethod">
+            <option value="">Select method</option>
+            <option value="">Card</option>
+            <option value="">Cash</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="text-white label-holder d-flex justify-content-center">
+            <label for="address" class="h4 mb-2">Address</label>
+        </div>
+        <input type="text" class="form-control" id="address" name="address"/>
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-secondary text-white mb-3">Add Order</button>
+    </div>
+</form>
 <footer class="footer bg-dark  py-2">
     <th:block th:include="~{/fragments/footer}"></th:block>
 </footer>

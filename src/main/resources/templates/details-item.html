@@ -12,17 +12,15 @@
     <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Details</span></h1>
     <hr class="my-3"/>
-    <div class="container-fluid bg-dark w-25 m-auto ">
-        <div class="row justify-content-center ">
-            <div th:object="${item}" class="card" style="width: 18rem;">
-                <img class="card-img-top" th:src="*{imgUrl}" alt="Card image cap">
+    <div class="container-fluid bg-gray w-25 m-auto ">
+        <div th:object="${books}" class="row justify-content-center">
+                <img class="mr-2 justify-content-center" th:src="*{imgUrl}" alt="img" width="200px" height="300px">
                 <div class="card-body bg-gray align-content-center text-center">
-                    <h6 th:text="|Item name - *{name}|"></h6>
+                    <h6 th:text="|Book name - *{title}|"></h6>
                     <p th:text="*{description}" class="card-text"></p>
                     <h6 th:text="*{price}">Price</h6>
-                    <a th:href="@{/items/delete/{id}(id = *{id})}" class="btn btn-danger" >Delete</a>
+                    <a th:href="@{/books/delete/{id}(id = *{id})}" class="btn btn-danger" >Buy</a>
                 </div>
-            </div>
         </div>
     </div>
 </main>

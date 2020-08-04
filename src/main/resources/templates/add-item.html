@@ -19,55 +19,54 @@
             </div>
             <select class="browser-default custom-select" id="author" name="author">
                 <option value="">Select author</option>
-                <option th:each="a : ${allAuthors}" th:text="${a}"  th:value="${a}"></option>
+                <option th:each="a : ${allAuthors}" th:text="${a}" th:field="*{author}" th:value="${a}"></option>
             </select>
-            <small class="text-danger">Incorrect name!</small>
+            <small th:each="e : ${#fields.errors('author')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="ISBN" class="h4 mb-2">ISBN</label>
             </div>
-            <input type="text" class="form-control" id="ISBN" name="ISBN"/>
-            <small class="text-danger">Incorrect ISBN!</small>
+            <input th:field="*{ISBN}"type="text" class="form-control" id="ISBN" name="ISBN"/>
+            <small th:each="e : ${#fields.errors('ISBN')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="title" class="h4 mb-2">Title</label>
             </div>
-            <input  type="text" class="form-control" id="title" name="title"/>
-            <small class="text-danger">Incorrect title!</small>
+            <input th:field="*{title}"  type="text" class="form-control" id="title" name="title"/>
+            <small th:each="e : ${#fields.errors('title')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <input  type="text" class="form-control" id="description" name="description"/>
-            <small class="text-danger">Incorrect description</small>
+            <input th:field="*{description}" type="text" class="form-control" id="description" name="description"/>
+            <small th:each="e : ${#fields.errors('description')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="price" class="h4 mb-2">Price</label>
             </div>
-            <input  type="number" class="form-control" id="price" name="price"/>
-            <small class="text-danger">Incorrect price!</small>
+            <input th:field="*{price}" type="number" class="form-control" id="price" name="price"/>
+            <small th:each="e : ${#fields.errors('price')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="year" class="h4 mb-2">Year</label>
             </div>
-            <input  type="text" class="form-control" id="year" name="year"/>
-            <small class="text-danger">Incorrect year!</small>
+            <input th:field="*{year}"  type="text" class="form-control" id="year" name="year"/>
+            <small th:each="e : ${#fields.errors('year')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="publisher" class="h4 mb-2">Publisher</label>
-                <small class="text-danger">Incorrect publisher!</small>
             </div>
             <select class="browser-default custom-select" id="publisher" name="publisher">
                 <option value="">Select publisher</option>
                 <option th:each="p : ${allPublishers}" th:text="${p}"  th:value="${p}"></option>
             </select>
-
+            <small th:each="e : ${#fields.errors('publisher')}" th:field="*{publisher}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
@@ -77,15 +76,15 @@
                 <option value="">Select category</option>
                 <option th:each="c : ${allCategories}" th:text="${c}"  th:value="${c}"></option>
             </select>
-            <small class="text-danger">Incorrect Category!</small>
+            <small th:each="e : ${#fields.errors('category')}" th:field="*{category}" th:text="${e}" class="text-danger"></small>
         </div>
 
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="languages" class="h4 mb-2">Languages</label>
             </div>
-            <input   type="text" class="form-control" id="languages" name="languages"/>
-            <small class="text-danger">Incorrect languages!</small>
+            <input  th:field="*{languages}" type="text" class="form-control" id="languages" name="languages"/>
+            <small th:each="e : ${#fields.errors('languages')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn btn-secondary text-white mb-3">Add Book</button>

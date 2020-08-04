@@ -11,24 +11,23 @@
     </nav>
 </header>
 <main>
-    <div th:object="${books}" class="container bg-blur rounded mt-5 mb-4">
-        <h1>All books</h1>
-        <div class="row mt-3 mb-3">
-            <div class="col-3 bg-gray rounded m-auto" style="height: 400px; overflow: auto">
-                <img class="mr-2" src="/img/airport.jpg" alt="Food" width="200px" height="300px">
-                <span th:text="|Name: Price:  lv|"></span>
-                <a class="ml-3 text-danger" th:href="@{/books/orders/list}">Buy</a>
-            </div>
-            <div class="col-3 bg-gray rounded m-auto" style="height: 400px; overflow: auto">
-                <img class="mr-2" src="/img/kings.jpg" alt="Food" width="200px" height="300px">
-                <span>Name: {name} Price: {price} lv</span>
-                <a class="ml-3 text-danger" th:href="@{/books/delete}">Buy</a>
-
-            </div>
-            <div class="col-3 bg-gray rounded m-auto" style="height: 400px; overflow: auto">
-                <img class="mr-2" src="/img/zavetite.jpg" alt="Food" width="200" height="300px">
-                <span>Name: {name} Price: {price} lv</span>
-                <a class="ml-3 text-danger" th:href="@{/books/delete}">Buy</a>
+    <h1 class="header">All books</h1>
+    <div class="container-fluid">
+        <div class="offers row mx-auto d-flex flex-row justify-content-center">
+            <div th:each="b : ${books}" th:object="${b}" class="offer card col-sm-6 col-md-3 bg-gray col-lg-2 m-1 p-0">
+                <a th:href="@{/books/details/(id = *{id})}">
+                    <div class="card-img-top-wrapper">
+                        <img class="card-img-top" th:src="*{imgUrl}" alt="image">
+                    </div>
+                    <div class="card-body pb-1">
+                        <h5 class="card-title text-center" th:text="*{title}"></h5>
+                    </div>
+                    <ul class="offer-details list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="card-text text-center bg-gray" th:text="*{price}"><span>Item price</span></div>
+                        </li>
+                    </ul>
+                </a>
             </div>
         </div>
     </div>

@@ -2,11 +2,13 @@ package bookstore.shop.web;
 
 import bookstore.shop.model.binding.CategoryAddBindingModel;
 import bookstore.shop.model.binding.PublisherAddBindingModel;
+import bookstore.shop.model.binding.UserRegisterBindingModel;
 import bookstore.shop.model.service.CategoryServiceModel;
 import bookstore.shop.model.service.PublisherServiceModel;
 import bookstore.shop.service.PublisherService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,14 +30,17 @@ private final ModelMapper modelMapper;
     }
 
     @GetMapping("/add")
-    public String add(){
+    public String add(Model model){
+        if (!model.containsAttribute("publisherAddBindingModel")){
+            model.addAttribute("publisherAddBindingModel", new PublisherAddBindingModel());
+        }
         return "add-publisher";
     }
     @PostMapping("/add")
     public String addConfirm(@Valid @ModelAttribute("publisherAddBindingModel") PublisherAddBindingModel publisherAddBindingModel,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "add-category";
+            return "add-publisher";
         }
         this.publisherService.addPublisher(this.modelMapper.map(publisherAddBindingModel, PublisherServiceModel.class));
         return "redirect:/";

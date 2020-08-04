@@ -2,11 +2,13 @@ package bookstore.shop.web;
 
 import bookstore.shop.model.binding.AuthorAddBindingModel;
 import bookstore.shop.model.binding.CategoryAddBindingModel;
+import bookstore.shop.model.binding.UserRegisterBindingModel;
 import bookstore.shop.model.service.AuthorServiceModel;
 import bookstore.shop.model.service.CategoryServiceModel;
 import bookstore.shop.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,7 +30,10 @@ public class CategoryController {
     }
 
     @GetMapping("/add")
-    public String add(){
+    public String add(Model model){
+        if (!model.containsAttribute("categoryAddBindingModel")){
+            model.addAttribute("categoryAddBindingModel", new CategoryAddBindingModel());
+        }
         return "add-category";
     }
     @PostMapping("/add")

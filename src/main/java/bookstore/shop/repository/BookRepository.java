@@ -10,4 +10,7 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, String> {
     @Override
     Optional<Book> findById(String id);
+
+    Optional<Book> findByTitle(String title);
+
 }

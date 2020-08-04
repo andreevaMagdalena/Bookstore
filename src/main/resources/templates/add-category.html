@@ -12,20 +12,20 @@
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Category</span></h1>
     <hr class="hr-3"/>
-    <form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:action="@{/categories/add}" method="POST">
+    <form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:object="${categoryAddBindingModel}" th:action="@{/categories/add}" method="POST">
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="categoryName" class="h4 mb-2">Category</label>
             </div>
-            <input type="text" class="form-control" id="categoryName" name="categoryName" />
-            <small class="text-danger">Incorrect name!</small>
+            <input th:field="*{categoryName}" type="text" class="form-control" id="categoryName" name="categoryName" />
+            <small th:each="e : ${#fields.errors('categoryName')}" th:text="${e}" class="text-danger"></small>
         </div>
         <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="description" class="h4 mb-2">Description</label>
             </div>
-            <input type="text" class="form-control" id="description" name="description" />
-            <small class="text-danger">Incorrect name!</small>
+            <input th:field="*{description}" type="text" class="form-control" id="description" name="description" />
+            <small th:each="e : ${#fields.errors('description')}" th:text="${e}" class="text-danger"></small>
         </div>
 
         <div class="button-holder d-flex justify-content-center">

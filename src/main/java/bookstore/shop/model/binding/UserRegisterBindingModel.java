@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class UserRegisterBindingModel {
     @Length(min = 2, message = "Username length must be more than two characters")
     private String username;
-    @Email
+    @Email(message = "Email is not valid!")
     private String email;
     @Length(min = 2, message = "Username length must be more than two characters")
     private String password;

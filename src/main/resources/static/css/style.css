@@ -33,6 +33,10 @@ body {
     background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
     background-color:#bab1ba;
 }
+.header{
+    text-align: center;
+    color: white;
+}
 .btn:active {
     position:relative;
     top:1px;
@@ -51,10 +55,11 @@ img {
 }
 .img-thumb {
     padding: .25rem;
-    background-color: #fff;
+    background: rgb(195,107,34);
     border: 1px solid #dee2e6;
     border-radius: .25rem;
     max-width: 100%;
+    text-align: center;
 }
 
 .bg-blur {
@@ -66,7 +71,6 @@ img {
     z-index: 2;
     width: 100%;
     padding: 20px;
-    text-align: center;
 }
 
 .error-color{

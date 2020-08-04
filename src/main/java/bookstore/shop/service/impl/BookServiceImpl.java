@@ -1,10 +1,11 @@
 package bookstore.shop.service.impl;
 
-import bookstore.shop.model.entity.Author;
+
 import bookstore.shop.model.entity.Book;
-import bookstore.shop.model.entity.Category;
-import bookstore.shop.model.entity.Publisher;
+
 import bookstore.shop.model.service.BookServiceModel;
+
+import bookstore.shop.model.view.BookViewModel;
 import bookstore.shop.repository.BookRepository;
 import bookstore.shop.service.*;
 import org.modelmapper.ModelMapper;
@@ -13,24 +14,18 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
     private final ModelMapper modelMapper;
-    private final AuthorService authorService;
-    private final PublisherService publisherService;
-    private final CategoryService categoryService;
-    private final OrderService orderService;
 
 
 
-    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper, AuthorService authorService, PublisherService publisherService, CategoryService categoryService, OrderService orderService) {
+    public BookServiceImpl(BookRepository bookRepository, ModelMapper modelMapper) {
         this.bookRepository = bookRepository;
         this.modelMapper = modelMapper;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
-        this.categoryService = categoryService;
-        this.orderService = orderService;
+
     }
 
     @Override
@@ -42,17 +37,34 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> allBooks() {
-       return this.bookRepository.findAll();
+    public List<BookViewModel> allBooks() {
+        return this.bookRepository.findAll().stream().map(book -> {
+            BookViewModel bookViewModel = this.modelMapper
+                    .map(book, BookViewModel.class);
+            bookViewModel.setImgUrl(String.format("/img/%s.jpg",
+                    book.getCategory().getCategoryName()));
+            return bookViewModel;
+        }).collect(Collectors.toList());
     }
 
     @Override
-    public BookServiceModel findById(String id) {
-        return this.modelMapper.map(this.bookRepository.findById(id), BookServiceModel.class);
+    public BookViewModel findById(String id) {
+        return this.bookRepository.findById(id).map(book -> {
+            BookViewModel bookViewModel = this.modelMapper
+                    .map(book, BookViewModel.class);
+            bookViewModel.setImgUrl(String.format("/img/%s.jpg", book.getCategory().getCategoryName()));
+            return bookViewModel;
+        }).orElse(null);
     }
 
     @Override
     public void delete(String id) {
         this.bookRepository.deleteById(id);
+    }
+
+    @Override
+    public BookServiceModel findByName(String name) {
+        return this.bookRepository.findByTitle(name)
+                .map(b -> this.modelMapper.map(b, BookServiceModel.class)).orElse(null);
     }
 }
