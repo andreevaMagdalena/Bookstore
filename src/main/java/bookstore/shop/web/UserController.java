@@ -9,6 +9,7 @@ import bookstore.shop.service.UserService;
 
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,10 +24,12 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
     @GetMapping("/profile")
     public String profile(@RequestParam("id") String id, Model model){
@@ -59,7 +62,9 @@ public class UserController {
 
             return "redirect:register";
         }
-        this.userService.register(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
+        if (userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+            this.userService.register(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
+        }
         return "redirect:login";
     }
     @PostMapping("/login")
@@ -72,7 +77,7 @@ public class UserController {
             return "login";
         }
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-        if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())){
+        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword(), user.getPassword())){
             redirectAttributes.addFlashAttribute("norFound", true);
             return "login";
         }

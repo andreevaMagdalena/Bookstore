@@ -7,6 +7,7 @@ import bookstore.shop.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Validator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,11 +15,15 @@ import java.util.stream.Collectors;
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
     private final ModelMapper modelMapper;
+    private final Validator validator;
 
-    public CategoryServiceImpl(CategoryRepository repository, ModelMapper modelMapper) {
+    public CategoryServiceImpl(CategoryRepository repository, ModelMapper modelMapper, Validator validator) {
         this.repository = repository;
         this.modelMapper = modelMapper;
+        this.validator = validator;
     }
+
+
 
     @Override
     public Category findById(String id) {
@@ -33,8 +38,13 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void addCategory(CategoryServiceModel categoryServiceModel) {
-        Category category = this.modelMapper.map(categoryServiceModel, Category.class);
-        this.repository.saveAndFlush(category);
+        if (!validator.validate(categoryServiceModel).isEmpty()){
+            throw new IllegalArgumentException("Invalid Category");
+        }
+        if(this.repository.findByCategoryName(categoryServiceModel.getCategoryName()).isEmpty()){
+            Category category = this.modelMapper.map(categoryServiceModel, Category.class);
+            this.repository.saveAndFlush(category);
+        }
 
     }
 

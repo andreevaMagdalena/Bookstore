@@ -31,7 +31,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public void addBook(BookServiceModel bookServiceModel) {
 
-       this.bookRepository.save(this.modelMapper
+       this.bookRepository.saveAndFlush(this.modelMapper
                .map(bookServiceModel, Book.class));
 
     }

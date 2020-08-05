@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/orders")
@@ -40,7 +41,7 @@ public class OrderController {
     public String addConfirm(@Valid @ModelAttribute("orderAddBindingModel")OrderAddBindingModel orderAddBindingModel,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
         System.out.println();
-        BookServiceModel book = this.bookService.findByName(orderAddBindingModel.getBook().getTitle());
+        BookServiceModel book = this.bookService.findByName(orderAddBindingModel.getBook());
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("orderAddBindingModel" ,orderAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.orderAddBindingModel", bindingResult);

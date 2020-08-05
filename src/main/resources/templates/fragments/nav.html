@@ -7,7 +7,6 @@
     </button>
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
         <ul class="navbar-nav row" th:width="300px" th:height="70px">
-
             <th:block th:if="${session.isEmpty()}">
                 <li class="nav-item col-md-4">
                     <a class="nav-link text-white active h5" href="/users/login">Login</a>
@@ -18,29 +17,35 @@
             </th:block>
             <th:block th:unless="${session.isEmpty()}">
                 <div th:object="${session.get('user')}">
-                    <div class="col-md-2">
-                        <a class="nav-link text-white active h6" th:text="|Hello *{username}|" th:href="@{/users/profile/(id = *{id})}"></a>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <a class="nav-link text-white active h6" th:text="|Hello *{username}|"
+                                   th:href="@{/users/profile/(id = *{id})}"></a>
+                            </div>
+                            <th:block th:if="*{role.name == 'ADMIN'}">
+                                <div class="col-sm">
+                                    <a class="nav-link text-white active h6" href="/authors/add">Add Author</a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="nav-link text-white active h6" href="/publishers/add">Add Publisher</a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="nav-link text-white active h6" href="/categories/add">Add Category</a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="nav-link text-white active h6" href="/books/add">Add Book</a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="nav-link text-white active h6" href="/orders/list">Orders</a>
+                                </div>
+
+                            </th:block>
+                            <li class="col-sm">
+                                <a class="nav-link text-white active h5" href="/users/logout">Logout</a>
+                            </li>
+                        </div>
                     </div>
-                    <th:block th:if="*{role.name == 'ADMIN'}">
-                        <div class="col-md-2">
-                            <a class="nav-link text-white active h6" href="/authors/add">Add Author</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="nav-link text-white active h6" href="/publishers/add">Add Publisher</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="nav-link text-white active h6" href="/categories/add">Add Category</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="nav-link text-white active h6" href="/books/add">Add Book</a>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="nav-link text-white active h6" href="/orders/list">Orders</a>
-                        </div>
-                    </th:block>
-                    <li class="col-md-2">
-                        <a class="nav-link text-white active h5" href="/users/logout">Logout</a>
-                    </li>
                 </div>
             </th:block>
         </ul>

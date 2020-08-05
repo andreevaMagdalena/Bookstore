@@ -40,6 +40,8 @@ public class CategoryController {
     public String addConfirm(@Valid @ModelAttribute("categoryAddBindingModel")CategoryAddBindingModel categoryAddBindingModel,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("categoryAddBindingModel" ,categoryAddBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.categoryAddBindingModel", bindingResult);
             return "add-category";
         }
         this.categoryService.addCategory(this.modelMapper.map(categoryAddBindingModel, CategoryServiceModel.class));
