@@ -1,9 +1,9 @@
 package bookstore.shop.web;
 
 import bookstore.shop.model.binding.AuthorAddBindingModel;
-import bookstore.shop.model.binding.UserRegisterBindingModel;
+
 import bookstore.shop.model.service.AuthorServiceModel;
-import bookstore.shop.model.service.BookServiceModel;
+
 import bookstore.shop.service.AuthorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.annotation.security.RolesAllowed;
 
 import javax.validation.Valid;
 
@@ -28,7 +29,7 @@ public class AuthorController {
         this.modelMapper = modelMapper;
     }
 
-
+    @RolesAllowed("ADMIN")
     @GetMapping("/add")
     public String addAuthor(Model model){
         if (!model.containsAttribute("authorAddBindingModel")){

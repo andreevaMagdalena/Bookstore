@@ -1,6 +1,7 @@
 package bookstore.shop.service;
 
 
+import bookstore.shop.model.binding.CategoryAddBindingModel;
 import bookstore.shop.model.entity.Category;
 import bookstore.shop.model.service.CategoryServiceModel;
 import bookstore.shop.model.service.UserServiceModel;
@@ -9,8 +10,11 @@ import bookstore.shop.repository.CategoryRepository;
 
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
-import org.modelmapper.ModelMapper;
+import org.junit.Before;
+
+import org.junit.Test;
+import org.mockito.Mockito;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,8 +38,13 @@ public class CategoryServiceTest  {
 
     @Autowired
     CategoryService categoryService;
-    @Autowired
-    ModelMapper modelMapper;
+    @Before
+    public void setUp() {
+        Category test = new Category();
+        test.setCategoryName("comedy");
+        Mockito.when(categoryRepository.findByCategoryName(test.getCategoryName()))
+                .thenReturn(Optional.of(test));
+    }
     @Test
     public void getByName_whenNameIsCorrect_shouldReturnCategory() {
 
@@ -49,6 +58,26 @@ public class CategoryServiceTest  {
 
         Assert.assertEquals("action", categoryServiceModel.getCategoryName());
     }
+    @Test
+    public void addCategory_whenNameIsCorrect() {
+
+        CategoryServiceModel category = new CategoryServiceModel("category", "ddddd");
+
+        categoryService.addCategory(category);
+
+        Assert.assertEquals("category", category.getCategoryName());
+    }
+    @Test(expected = NullPointerException.class)
+    public void addCategory_whenNameIsNotCorrect() {
+
+        CategoryServiceModel category = new CategoryServiceModel("category", "ddddd");
+
+        categoryService.addCategory(category);
+
+        Assert.assertEquals("category2", category.getCategoryName());
+    }
+
+
 
 
 }

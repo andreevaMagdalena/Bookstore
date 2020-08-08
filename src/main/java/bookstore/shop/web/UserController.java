@@ -31,6 +31,7 @@ public class UserController {
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
+    
     @GetMapping("/profile")
     public String profile(@RequestParam("id") String id, Model model){
         model.addAttribute("user", this.modelMapper.map(this.userService.findById(id), UserProfileView.class));
@@ -77,7 +78,7 @@ public class UserController {
             return "login";
         }
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword(), user.getPassword())){
+       if (user == null || !userLoginBindingModel.getPassword().equals(user.getPassword())){
             redirectAttributes.addFlashAttribute("norFound", true);
             return "login";
         }

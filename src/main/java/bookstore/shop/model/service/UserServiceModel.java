@@ -30,4 +30,6 @@ public class UserServiceModel extends BaseServiceModel {
     private String address;
     @NotNull(message = "Phone is required")
     private String phone;
+
+
 }
