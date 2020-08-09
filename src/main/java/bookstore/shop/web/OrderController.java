@@ -2,6 +2,7 @@ package bookstore.shop.web;
 
 import bookstore.shop.model.binding.BookAddBindingModel;
 import bookstore.shop.model.binding.OrderAddBindingModel;
+import bookstore.shop.model.entity.Payment;
 import bookstore.shop.model.service.*;
 import bookstore.shop.service.BookService;
 import bookstore.shop.service.OrderService;
@@ -40,8 +41,10 @@ public class OrderController {
     @PostMapping("/list")
     public String addConfirm(@Valid @ModelAttribute("orderAddBindingModel")OrderAddBindingModel orderAddBindingModel,
                              BindingResult bindingResult, RedirectAttributes redirectAttributes){
-        System.out.println();
+
         BookServiceModel book = this.bookService.findByName(orderAddBindingModel.getBook());
+        LocalDateTime localDateTime = LocalDateTime.now();
+
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("orderAddBindingModel" ,orderAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.orderAddBindingModel", bindingResult);
@@ -49,6 +52,7 @@ public class OrderController {
         }
         OrderServiceModel order = this.modelMapper.map(orderAddBindingModel, OrderServiceModel.class);
         order.setBook(book);
+        order.setOrderDate(localDateTime);
 
         this.orderService.addOrder(order);
 

@@ -25,7 +25,8 @@ public class Order extends BaseEntity {
     @Column(columnDefinition = "TEXT")
     private String shoppingInfo;
     @Column(name = "peyment_method")
-    private String paymentMethod;
+    @Enumerated(value = EnumType.STRING)
+    private Payment paymentMethod;
     @Column
     private String address;
 

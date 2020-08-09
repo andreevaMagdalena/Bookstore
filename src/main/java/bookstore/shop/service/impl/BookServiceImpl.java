@@ -30,6 +30,11 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(BookServiceModel bookServiceModel) {
+        Book book = this.bookRepository.findByTitle(bookServiceModel.getTitle()).orElse(null);
+
+        if (book != null){
+            throw new IllegalArgumentException("Book already exists");
+        }
 
        this.bookRepository.saveAndFlush(this.modelMapper
                .map(bookServiceModel, Book.class));

@@ -1,5 +1,6 @@
 package bookstore.shop.model.service;
 
+import bookstore.shop.model.entity.Payment;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,7 +26,7 @@ public class OrderServiceModel {
     @NotNull(message = "Information is required")
     private String shoppingInfo;
     @NotNull(message = "Method is required")
-    private String paymentMethod;
+    private Payment paymentMethod;
     @NotNull(message = "Address is required")
     private String address;
 }
