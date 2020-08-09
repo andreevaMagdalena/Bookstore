@@ -61,12 +61,12 @@ public class UserController {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel");
 
-            return "redirect:register";
+            return "/register";
         }
         if (userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
             this.userService.register(this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
         }
-        return "redirect:login";
+        return "/login";
     }
     @PostMapping("/login")
     public String loginConfirm(@Valid @ModelAttribute() UserLoginBindingModel userLoginBindingModel,

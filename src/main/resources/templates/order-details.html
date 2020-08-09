@@ -11,7 +11,7 @@
 </header>
 <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Order</span></h1>
 <hr class="hr-3"/>
-<form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:action="@{/orders/list}" method="POST">
+<form class="mx-auto w-25 bg-gray p-3 rounded text-center" th:object="${orderAddBindingModel}" th:action="@{/orders/list}" method="POST">
     <div class="form-group">
         <div class="text-white label-holder d-flex justify-content-center">
             <label for="book" class="h4 mb-2">Book</label>
@@ -26,8 +26,8 @@
         <div class="text-white label-holder d-flex justify-content-center">
             <label for="price" class="h4 mb-2">Price</label>
         </div>
-        <input type="number" class="form-control" id="price" name="price" />
-        <small class="text-danger">Incorrect Price!</small>
+        <input th:field="*{price}" type="number" class="form-control" id="price" name="price" />
+        <small th:each="e : ${#fields.errors('price')}" th:text="${e}" class="text-danger"></small>
     </div>
     <div class="form-group">
         <div class="text-white label-holder d-flex justify-content-center">

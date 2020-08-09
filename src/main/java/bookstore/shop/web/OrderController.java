@@ -36,6 +36,7 @@ public class OrderController {
     @GetMapping("/list")
     public String addOrder(Model model){
         model.addAttribute("books", bookService.allBooks());
+        model.addAttribute("orderAddBindingModel", new OrderAddBindingModel());
         return "order-details";
     }
     @PostMapping("/list")

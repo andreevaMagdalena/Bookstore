@@ -38,13 +38,7 @@ public class CategoryServiceTest  {
 
     @Autowired
     CategoryService categoryService;
-    @Before
-    public void setUp() {
-        Category test = new Category();
-        test.setCategoryName("comedy");
-        Mockito.when(categoryRepository.findByCategoryName(test.getCategoryName()))
-                .thenReturn(Optional.of(test));
-    }
+
     @Test
     public void getByName_whenNameIsCorrect_shouldReturnCategory() {
 
